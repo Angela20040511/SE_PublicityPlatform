@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>系统管理 - 宣传协同平台</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: topbar}"></div>
+<main class="container">
+    <div class="page-title">
+        <div>
+            <div class="eyebrow">基础配置</div>
+            <h1>系统管理</h1>
+            <p>维护用户、部门和任务类型，保证派单与审核流程顺畅。</p>
+        </div>
+    </div>
+    <div class="message" th:if="${message}" th:text="${message}"></div>
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+
+    <div class="grid grid-3">
+        <section class="card">
+            <h2>新增用户</h2>
+            <form th:action="@{/admin/users}" th:object="${userForm}" method="post">
+                <label>账号</label>
+                <input th:field="*{username}">
+                <label>密码</label>
+                <input th:field="*{password}" type="password">
+                <label>姓名</label>
+                <input th:field="*{realName}">
+                <label>角色</label>
+                <select th:field="*{role}">
+                    <option value="applicant">申请人</option>
+                    <option value="teacher">负责老师</option>
+                    <option value="director">主任</option>
+                    <option value="leader">部长</option>
+                    <option value="member">干事</option>
+                    <option value="admin">系统管理员</option>
+                </select>
+                <label>所属部门</label>
+                <select th:field="*{departmentId}">
+                    <option value="">无</option>
+                    <option th:each="department : ${departments}" th:value="${department.departmentId}" th:text="${department.departmentName}">部门</option>
+                </select>
+                <label>电话</label>
+                <input th:field="*{phone}">
+                <label>邮箱</label>
+                <input th:field="*{email}">
+                <div class="toolbar">
+                    <button type="submit">新增用户</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>新增任务类型</h2>
+            <form th:action="@{/admin/task-types}" th:object="${taskTypeForm}" method="post">
+                <label>类型名称</label>
+                <input th:field="*{typeName}">
+                <label>默认部门</label>
+                <select th:field="*{defaultDepartmentId}">
+                    <option value="">无</option>
+                    <option th:each="department : ${departments}" th:value="${department.departmentId}" th:text="${department.departmentName}">部门</option>
+                </select>
+                <label>说明</label>
+                <textarea th:field="*{description}"></textarea>
+                <div class="toolbar">
+                    <button type="submit">新增类型</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>部门</h2>
+            <table>
+                <tbody>
+                <tr th:each="department : ${departments}">
+                    <td th:text="${department.departmentName}">部门</td>
+                    <td class="muted" th:text="${department.description}">说明</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <section class="card" style="margin-top:16px;">
+        <h2>用户列表</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>账号</th>
+                <th>姓名</th>
+                <th>角色</th>
+                <th>部门</th>
+                <th>联系方式</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}">账号</td>
+                <td th:text="${user.realName}">姓名</td>
+                <td><span class="badge status-info" th:text="${@ui.role(user.role)}">角色</span></td>
+                <td th:text="${user.departmentId ?: '无'}">部门</td>
+                <td>
+                    <span th:text="${user.phone}">电话</span>
+                    <div class="muted" th:text="${user.email}">邮箱</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="card" style="margin-top:16px;">
+        <h2>任务类型</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>类型</th>
+                <th>默认部门ID</th>
+                <th>说明</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="taskType : ${taskTypes}">
+                <td th:text="${taskType.typeName}">类型</td>
+                <td th:text="${taskType.defaultDepartmentId ?: '无'}">部门</td>
+                <td th:text="${taskType.description}">说明</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录 - 宣传协同平台</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="login-shell">
+    <section class="login-card">
+        <div class="brand login-brand">
+            <span class="brand-mark">宣</span>
+            <span>宣传协同平台</span>
+        </div>
+        <h1>学院宣传工作智能协同管理平台</h1>
+        <div class="error" th:if="${error}" th:text="${error}"></div>
+        <form th:action="@{/login}" th:object="${loginForm}" method="post">
+            <label for="username">账号</label>
+            <input id="username" th:field="*{username}" autocomplete="username">
+            <div class="field-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            <label for="password">密码</label>
+            <input id="password" type="password" th:field="*{password}" autocomplete="current-password">
+            <div class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            <div class="toolbar">
+                <button type="submit">登录</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

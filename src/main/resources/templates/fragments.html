@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="topbar" class="topbar">
+    <div class="brand">
+        <span class="brand-mark">宣</span>
+        <span>宣传协同平台</span>
+    </div>
+    <nav class="nav">
+        <a th:if="${currentUser == null or currentUser.role != 'admin'}" th:href="@{/dashboard}">首页</a>
+        <a th:if="${currentUser == null or currentUser.role != 'admin'}" th:href="@{/requests}">宣传需求</a>
+        <a th:if="${currentUser != null and (currentUser.role == 'teacher' or currentUser.role == 'director')}" th:href="@{/requests/review}">需求审核</a>
+        <a th:if="${currentUser == null or currentUser.role != 'admin'}" th:href="@{/tasks}">任务与成果</a>
+        <a th:if="${currentUser != null and currentUser.role == 'admin'}" th:href="@{/admin}">系统管理</a>
+    </nav>
+    <div class="userbar" th:if="${currentUser != null}">
+        <span th:text="${currentUser.realName}">用户</span>
+        <span class="role-pill" th:text="${@ui.role(currentUser.role)}">角色</span>
+        <a th:href="@{/logout}" style="color:#ffffff;margin-left:10px;">退出</a>
+    </div>
+</div>
+</body>
+</html>

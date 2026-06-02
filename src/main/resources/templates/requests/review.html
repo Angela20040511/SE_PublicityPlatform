@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>需求审核 - 宣传协同平台</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: topbar}"></div>
+<main class="container">
+    <div class="page-title">
+        <div>
+            <div class="eyebrow">审核中心</div>
+            <h1>待审核宣传需求</h1>
+            <p>审核通过后会自动按宣传类型生成子任务。</p>
+        </div>
+    </div>
+    <div class="message" th:if="${message}" th:text="${message}"></div>
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+    <table>
+        <thead>
+        <tr>
+            <th>活动</th>
+            <th>宣传类型</th>
+            <th>联系人</th>
+            <th>截止时间</th>
+            <th>审核处理</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="request : ${requests}">
+            <td>
+                <strong th:text="${request.activityName}">活动</strong>
+                <div class="muted" th:text="${request.activityLocation}">地点</div>
+                <div th:text="${request.activityContent}">内容</div>
+            </td>
+            <td th:text="${request.publicityTypes}">类型</td>
+            <td>
+                <span th:text="${request.contactName}">联系人</span>
+                <div class="muted" th:text="${request.contactPhone}">电话</div>
+            </td>
+            <td th:text="${#temporals.format(request.deadline, 'yyyy-MM-dd HH:mm')}">截止</td>
+            <td>
+                <form class="inline-form" th:action="@{/requests/{id}/review(id=${request.requestId})}" method="post">
+                    <input name="comment" placeholder="审核意见">
+                    <button name="result" value="approve" type="submit">通过并生成任务</button>
+                    <button class="secondary" name="result" value="return" type="submit">退回补充</button>
+                    <button class="danger" name="result" value="reject" type="submit">驳回</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(requests)}">
+            <td colspan="5" class="muted">暂无待审核申请</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>任务与成果 - 宣传协同平台</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: topbar}"></div>
+<main class="container">
+    <div class="page-title">
+        <div>
+            <div class="eyebrow">协同执行</div>
+            <h1>任务与成果</h1>
+            <p>完成派单、成果提交、初审复审和最终确认。</p>
+        </div>
+    </div>
+    <div class="message" th:if="${message}" th:text="${message}"></div>
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+    <table>
+        <thead>
+        <tr>
+            <th>任务</th>
+            <th>部门/干事</th>
+            <th>状态</th>
+            <th>成果</th>
+            <th th:if="${showTaskActions}">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td>
+                <strong th:text="${task.activityName}">活动</strong>
+                <div class="muted">
+                    <span th:text="${task.typeName}">类型</span>
+                    <span> · </span>
+                    <span th:text="${#temporals.format(task.deadline, 'yyyy-MM-dd HH:mm')}">截止</span>
+                </div>
+                <div class="muted" th:text="${task.activityLocation}">地点</div>
+            </td>
+            <td>
+                <div th:text="${task.departmentName ?: '未派部门'}">部门</div>
+                <div class="muted" th:text="${task.assigneeName ?: '未安排干事'}">干事</div>
+            </td>
+            <td>
+                <span th:class="${'badge ' + @ui.statusClass(task.taskStatus)}" th:text="${@ui.status(task.taskStatus)}">任务状态</span>
+                <span th:class="${'badge ' + @ui.statusClass(task.submissionStatus)}" th:if="${task.submissionStatus != null}" th:text="${@ui.status(task.submissionStatus)}">成果状态</span>
+            </td>
+            <td>
+                <a class="link-chip"
+                   th:if="${@attachment.available(task.fileUrl)}"
+                   th:href="${task.fileUrl}"
+                   th:target="${@attachment.external(task.fileUrl) ? '_blank' : '_self'}"
+                   th:text="${@attachment.display(task.fileUrl)}">成果链接</a>
+                <span th:if="${@attachment.hasValue(task.fileUrl) and !@attachment.available(task.fileUrl)}" class="file-missing">
+                    <span th:text="${@attachment.display(task.fileUrl)}">文件未上传</span>
+                </span>
+                <span th:if="${task.fileUrl == null}" class="muted">暂无成果</span>
+                <div th:if="${task.submissionDescription != null}" class="muted" th:text="${task.submissionDescription}"></div>
+            </td>
+            <td th:if="${showTaskActions}">
+                <form th:if="${currentUser.role == 'teacher' or currentUser.role == 'director'}"
+                      class="inline-form task-action-form"
+                      th:action="@{/tasks/{id}/department(id=${task.taskId})}"
+                      method="post">
+                    <select name="departmentId" th:disabled="${task.taskStatus == 'completed'}">
+                        <option th:each="department : ${departments}"
+                                th:value="${department.departmentId}"
+                                th:selected="${department.departmentId == task.departmentId}"
+                                th:text="${department.departmentName}">部门</option>
+                    </select>
+                    <button type="submit" th:disabled="${task.taskStatus == 'completed'}">派单</button>
+                    <span class="muted" th:if="${task.taskStatus == 'completed'}">任务已完成</span>
+                </form>
+
+                <form th:if="${currentUser.role == 'teacher' or currentUser.role == 'director'}"
+                      class="inline-form task-action-form subtle-action-form"
+                      th:action="@{/tasks/{id}/collaboration-department(id=${task.taskId})}"
+                      method="post">
+                    <select name="departmentId" th:disabled="${task.taskStatus == 'completed'}">
+                        <option th:each="department : ${departments}"
+                                th:value="${department.departmentId}"
+                                th:disabled="${department.departmentId == task.departmentId}"
+                                th:text="${department.departmentName}">部门</option>
+                    </select>
+                    <button class="secondary" type="submit" th:disabled="${task.taskStatus == 'completed'}">追加协作部门</button>
+                </form>
+
+                <form th:if="${currentUser.role == 'leader' and task.taskStatus != 'completed'}"
+                      class="inline-form task-action-form leader-assignment-form"
+                      th:action="@{/tasks/{id}/assignee(id=${task.taskId})}"
+                      method="post">
+                    <select name="assigneeId">
+                        <option th:each="member : ${members}" th:value="${member.userId}" th:text="${member.realName}">干事</option>
+                    </select>
+                    <input name="remark" placeholder="派单备注">
+                    <button type="submit" th:disabled="${members == null or #lists.isEmpty(members)}">安排干事</button>
+                    <span class="muted" th:if="${members == null or #lists.isEmpty(members)}">本部门暂无可安排干事</span>
+                </form>
+                <span class="muted action-note" th:if="${currentUser.role == 'leader' and task.taskStatus == 'completed'}">任务已完成，无需继续安排。</span>
+
+                <form th:if="${currentUser.role == 'member' and task.assigneeId == currentUser.userId and (task.taskStatus == 'in_progress' or task.taskStatus == 'revision_required')}"
+                      class="inline-form"
+                      th:action="@{/tasks/{id}/submit(id=${task.taskId})}"
+                      method="post">
+                    <input name="fileUrl" placeholder="成果文件地址或链接">
+                    <input name="description" placeholder="成果说明">
+                    <button type="submit">提交成果</button>
+                </form>
+
+                <form th:if="${currentUser.role == 'leader' and task.latestSubmissionId != null and task.submissionStatus == 'submitted'}"
+                      class="inline-form"
+                      th:action="@{/submissions/{id}/leader-review(id=${task.latestSubmissionId})}"
+                      method="post">
+                    <input name="comment" placeholder="初审意见">
+                    <button name="result" value="approve" type="submit">初审通过</button>
+                    <button class="secondary" name="result" value="revision" type="submit">要求修改</button>
+                </form>
+
+                <form th:if="${(currentUser.role == 'teacher' or currentUser.role == 'director') and task.latestSubmissionId != null and task.submissionStatus == 'leader_approved'}"
+                      class="inline-form"
+                      th:action="@{/submissions/{id}/teacher-review(id=${task.latestSubmissionId})}"
+                      method="post">
+                    <input name="comment" placeholder="复审意见">
+                    <button name="result" value="approve" type="submit">复审通过</button>
+                    <button class="secondary" name="result" value="revision" type="submit">要求修改</button>
+                </form>
+
+                <form th:if="${currentUser.role == 'applicant' and task.latestSubmissionId != null and task.submissionStatus == 'teacher_approved' and task.applicantId == currentUser.userId}"
+                      class="inline-form"
+                      th:action="@{/submissions/{id}/confirm(id=${task.latestSubmissionId})}"
+                      method="post">
+                    <button type="submit">确认并归档</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(tasks)}">
+            <td th:colspan="${showTaskActions ? 5 : 4}" class="muted">暂无任务</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

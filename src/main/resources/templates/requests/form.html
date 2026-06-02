@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>提交宣传需求 - 宣传协同平台</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: topbar}"></div>
+<main class="container">
+    <div class="page-title">
+        <div>
+            <div class="eyebrow">新申请</div>
+            <h1>提交宣传需求</h1>
+            <p>填写活动信息，系统会按宣传类型拆分任务。</p>
+        </div>
+        <a class="button secondary" th:href="@{/requests}">返回列表</a>
+    </div>
+    <section class="panel form-panel">
+        <form th:action="@{/requests}" th:object="${requestForm}" method="post">
+            <label for="activityName">活动名称</label>
+            <input id="activityName" th:field="*{activityName}">
+            <div class="field-error" th:if="${#fields.hasErrors('activityName')}" th:errors="*{activityName}"></div>
+
+            <label for="activityTime">活动时间</label>
+            <input id="activityTime" type="datetime-local" th:field="*{activityTime}">
+            <div class="field-error" th:if="${#fields.hasErrors('activityTime')}" th:errors="*{activityTime}"></div>
+
+            <label for="activityLocation">活动地点</label>
+            <input id="activityLocation" th:field="*{activityLocation}">
+            <div class="field-error" th:if="${#fields.hasErrors('activityLocation')}" th:errors="*{activityLocation}"></div>
+
+            <label for="activityContent">活动内容</label>
+            <textarea id="activityContent" th:field="*{activityContent}"></textarea>
+
+            <label for="publicityTypes">宣传类型</label>
+            <input id="publicityTypes" th:field="*{publicityTypes}" placeholder="例如：拍照,推送,新闻稿">
+            <div class="field-error" th:if="${#fields.hasErrors('publicityTypes')}" th:errors="*{publicityTypes}"></div>
+
+            <label for="contactName">联系人</label>
+            <input id="contactName" th:field="*{contactName}">
+            <div class="field-error" th:if="${#fields.hasErrors('contactName')}" th:errors="*{contactName}"></div>
+
+            <label for="contactPhone">联系方式</label>
+            <input id="contactPhone" th:field="*{contactPhone}">
+            <div class="field-error" th:if="${#fields.hasErrors('contactPhone')}" th:errors="*{contactPhone}"></div>
+
+            <label for="deadline">成果截止时间</label>
+            <input id="deadline" type="datetime-local" th:field="*{deadline}">
+            <div class="field-error" th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}"></div>
+
+            <label for="attachmentUrl">附件地址或外部链接</label>
+            <input id="attachmentUrl" th:field="*{attachmentUrl}">
+
+            <div class="toolbar">
+                <button type="submit">提交申请</button>
+                <a class="button secondary" th:href="@{/requests}">取消</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>宣传需求 - 宣传协同平台</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: topbar}"></div>
+<main class="container">
+    <div class="page-title">
+        <div>
+            <div class="eyebrow">需求池</div>
+            <h1>宣传需求</h1>
+            <p>查看申请进度、活动信息和附件状态。</p>
+        </div>
+        <a th:if="${currentUser.role == 'applicant'}" class="button" th:href="@{/requests/new}">新增申请</a>
+    </div>
+    <div class="message" th:if="${message}" th:text="${message}"></div>
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+    <table>
+        <thead>
+        <tr>
+            <th>活动名称</th>
+            <th>活动时间</th>
+            <th>宣传类型</th>
+            <th>联系人</th>
+            <th>截止时间</th>
+            <th>状态</th>
+            <th>附件/链接</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="request : ${requests}">
+            <td>
+                <strong th:text="${request.activityName}">活动</strong>
+                <div class="muted" th:text="${request.activityLocation}">地点</div>
+            </td>
+            <td th:text="${#temporals.format(request.activityTime, 'yyyy-MM-dd HH:mm')}">时间</td>
+            <td th:text="${request.publicityTypes}">类型</td>
+            <td>
+                <span th:text="${request.contactName}">联系人</span>
+                <div class="muted" th:text="${request.contactPhone}">电话</div>
+            </td>
+            <td th:text="${#temporals.format(request.deadline, 'yyyy-MM-dd HH:mm')}">截止</td>
+            <td><span th:class="${'badge ' + @ui.statusClass(request.status)}" th:text="${@ui.status(request.status)}">状态</span></td>
+            <td>
+                <a class="link-chip"
+                   th:if="${@attachment.available(request.attachmentUrl)}"
+                   th:href="${request.attachmentUrl}"
+                   th:target="${@attachment.external(request.attachmentUrl) ? '_blank' : '_self'}"
+                   th:text="${@attachment.display(request.attachmentUrl)}">附件</a>
+                <span th:if="${@attachment.hasValue(request.attachmentUrl) and !@attachment.available(request.attachmentUrl)}" class="badge status-warning">
+                    <span th:text="${@attachment.display(request.attachmentUrl)}">文件未上传</span>
+                </span>
+                <span th:if="${request.attachmentUrl == null or request.attachmentUrl.isBlank()}" class="muted">无</span>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(requests)}">
+            <td colspan="7" class="muted">暂无宣传需求</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

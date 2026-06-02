@@ -1,0 +1,215 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT">
+  <diagram name="总体架构图" id="arch">
+    <mxGraphModel dx="1514" dy="1028" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontFamily=Microsoft YaHei;" value="学院宣传工作智能协同管理平台总体架构图" vertex="1">
+          <mxGeometry height="30" width="450" x="375" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sys" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#F8F9FA;strokeColor=#B0B0B0;strokeWidth=2;fontFamily=Microsoft YaHei;" vertex="1">
+          <mxGeometry height="730" width="1040" x="60" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="layer1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#EAF3FF;strokeColor=#6BA7E8;strokeWidth=1.5;fontFamily=Microsoft YaHei;" vertex="1">
+          <mxGeometry height="150" width="970" x="90" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="layer1_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontFamily=Microsoft YaHei;align=left;" value="表现层" vertex="1">
+          <mxGeometry height="25" width="130" x="110" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="layer2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#EAF9EF;strokeColor=#58B878;strokeWidth=1.5;fontFamily=Microsoft YaHei;" vertex="1">
+          <mxGeometry height="210" width="970" x="90" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="layer2_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontFamily=Microsoft YaHei;align=left;" value="业务逻辑层" vertex="1">
+          <mxGeometry height="25" width="130" x="110" y="287" as="geometry" />
+        </mxCell>
+        <mxCell id="layer3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFF4E5;strokeColor=#E6A23C;strokeWidth=1.5;fontFamily=Microsoft YaHei;" vertex="1">
+          <mxGeometry height="130" width="970" x="90" y="505" as="geometry" />
+        </mxCell>
+        <mxCell id="layer3_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontFamily=Microsoft YaHei;align=left;" value="数据访问层" vertex="1">
+          <mxGeometry height="25" width="130" x="110" y="517" as="geometry" />
+        </mxCell>
+        <mxCell id="layer4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#F4EDFF;strokeColor=#9B6BE8;strokeWidth=1.5;fontFamily=Microsoft YaHei;" vertex="1">
+          <mxGeometry height="110" width="980" x="90" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="layer4_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontFamily=Microsoft YaHei;align=left;" value="数据存储层" vertex="1">
+          <mxGeometry height="25" width="130" x="110" y="667" as="geometry" />
+        </mxCell>
+        <mxCell id="m_login" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#4A90E2;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="登录与权限入口" vertex="1">
+          <mxGeometry height="50" width="145" x="210" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="m_apply" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#4A90E2;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="申请人操作界面" vertex="1">
+          <mxGeometry height="50" width="145" x="375" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="m_review" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#4A90E2;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="审核与派单界面" vertex="1">
+          <mxGeometry height="50" width="145" x="540" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="m_exec" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#4A90E2;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="任务执行界面" vertex="1">
+          <mxGeometry height="50" width="145" x="705" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="m_stat_ui" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#4A90E2;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="统计与管理界面" vertex="1">
+          <mxGeometry height="50" width="145" x="870" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="m_auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#42B983;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="用户认证模块" vertex="1">
+          <mxGeometry height="58" width="130" x="150" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="m_req" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#42B983;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="宣传需求管理模块" vertex="1">
+          <mxGeometry height="58" width="150" x="300" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="m_task" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#42B983;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="任务拆分与派单模块" vertex="1">
+          <mxGeometry height="58" width="165" x="475" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="m_work" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#42B983;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="成果审核与归档模块" vertex="1">
+          <mxGeometry height="58" width="165" x="668" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="m_notify" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#42B983;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="提醒与日志模块" vertex="1">
+          <mxGeometry height="58" width="135" x="855" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="m_stats" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#42B983;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="数据统计模块" vertex="1">
+          <mxGeometry height="58" width="165" x="475" y="415" as="geometry" />
+        </mxCell>
+        <mxCell id="m_userdao" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#D99024;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="用户数据访问模块" vertex="1">
+          <mxGeometry height="50" width="160" x="225" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="m_reqdao" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#D99024;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="需求任务数据访问模块" vertex="1">
+          <mxGeometry height="50" width="180" x="420" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="m_assetdao" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#D99024;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="成果资产数据访问模块" vertex="1">
+          <mxGeometry height="50" width="180" x="635" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="m_paramdao" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#D99024;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="系统参数数据访问模块" vertex="1">
+          <mxGeometry height="50" width="180" x="850" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="db_mysql" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#8E65D5;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="业务数据库 MySQL" vertex="1">
+          <mxGeometry height="55" width="175" x="235" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="db_file" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#8E65D5;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="附件与素材存储" vertex="1">
+          <mxGeometry height="55" width="175" x="505" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="db_cache" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FFFFFF;strokeColor=#8E65D5;strokeWidth=1.5;fontFamily=Microsoft YaHei;fontSize=13;" value="缓存与统计数据" vertex="1">
+          <mxGeometry height="55" width="175" x="775" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="m_review" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_req" value="表现层请求">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="612" y="265" />
+              <mxPoint x="420" y="265" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="m_apply" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_req" value="表现层请求">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="448" y="225" />
+              <mxPoint x="375" y="225" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="m_exec" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_task" value="表现层请求">
+          <mxGeometry relative="1" x="-0.2347" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="778" y="215" />
+              <mxPoint x="558" y="215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="m_login" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_auth" value="认证请求">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="m_stat_ui" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_stats" value="统计请求">
+          <mxGeometry relative="1" x="-0.277" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="942" y="235" />
+              <mxPoint x="660" y="235" />
+              <mxPoint x="660" y="425" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="m_req" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_reqdao" value="调用 DAO">
+          <mxGeometry relative="1" x="0.132" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="375" y="495" />
+              <mxPoint x="460" y="495" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="m_task" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_reqdao" value="调用 DAO">
+          <mxGeometry relative="1" x="0.2994" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="500" y="515" />
+              <mxPoint x="500" y="515" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="m_work" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_assetdao" value="调用 DAO">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="730" y="515" />
+              <mxPoint x="730" y="515" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="m_auth" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_userdao" value="调用 DAO">
+          <mxGeometry relative="1" x="0.1908" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="215" y="495" />
+              <mxPoint x="305" y="495" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="m_stats" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="m_reqdao" value="读取统计">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="558" y="525" />
+              <mxPoint x="558" y="525" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="m_userdao" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="db_mysql" value="读写用户">
+          <mxGeometry relative="1" x="0.5" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="290" y="675" />
+              <mxPoint x="290" y="675" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="m_reqdao" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="db_mysql" value="读写任务">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="645" />
+              <mxPoint x="330" y="645" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="m_assetdao" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="db_file" value="读写成果">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="725" y="645" />
+              <mxPoint x="593" y="645" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="m_paramdao" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="db_mysql" value="读写参数">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="615" />
+              <mxPoint x="360" y="615" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="m_stats" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;strokeColor=#606060;fontFamily=Microsoft YaHei;edgeStyle=orthogonalEdgeStyle;" target="db_cache" value="缓存统计">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="840" y="444" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

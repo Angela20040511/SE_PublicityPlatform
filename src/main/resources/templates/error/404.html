@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>资源不存在 - 宣传协同平台</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="login-shell">
+    <section class="login-card error-card">
+        <div class="eyebrow">404</div>
+        <h1>资源暂时不可用</h1>
+        <p class="muted">这个地址没有对应的文件。若是 `/upload/` 开头的附件，需要先把真实文件上传或放入系统上传目录。</p>
+        <div class="toolbar">
+            <a class="button" th:href="@{/dashboard}">返回工作台</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>
