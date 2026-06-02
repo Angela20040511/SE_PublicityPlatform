@@ -112,6 +112,12 @@ public class TaskService {
         if (task == null || !leader.getDepartmentId().equals(task.getDepartmentId())) {
             throw new IllegalStateException("只能安排本部门任务");
         }
+        if ("completed".equals(task.getTaskStatus())) {
+            throw new IllegalStateException("任务已完成，无需继续安排");
+        }
+        if (!"waiting_assignment".equals(task.getTaskStatus()) && task.getAssigneeId() != null) {
+            throw new IllegalStateException("已安排干事，无需重复派单");
+        }
         taskMapper.updateAssigneeAndStatus(taskId, assigneeId, "in_progress");
         Assignment assignment = new Assignment();
         assignment.setTaskId(taskId);

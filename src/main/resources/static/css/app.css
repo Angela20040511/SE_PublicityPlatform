@@ -218,6 +218,13 @@ a:hover {
     margin: 0;
 }
 
+.panel-note {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 0;
+    padding: 12px 20px;
+}
+
 .metric-label {
     color: var(--muted);
     font-size: 13px;

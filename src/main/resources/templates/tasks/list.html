@@ -86,7 +86,7 @@
                     <button class="secondary" type="submit" th:disabled="${task.taskStatus == 'completed'}">追加协作部门</button>
                 </form>
 
-                <form th:if="${currentUser.role == 'leader' and task.taskStatus != 'completed'}"
+                <form th:if="${currentUser.role == 'leader' and (task.taskStatus == 'waiting_assignment' or task.assigneeId == null)}"
                       class="inline-form task-action-form leader-assignment-form"
                       th:action="@{/tasks/{id}/assignee(id=${task.taskId})}"
                       method="post">
@@ -98,6 +98,7 @@
                     <span class="muted" th:if="${members == null or #lists.isEmpty(members)}">本部门暂无可安排干事</span>
                 </form>
                 <span class="muted action-note" th:if="${currentUser.role == 'leader' and task.taskStatus == 'completed'}">任务已完成，无需继续安排。</span>
+                <span class="muted action-note" th:if="${currentUser.role == 'leader' and task.taskStatus != 'completed' and task.assigneeId != null}">已安排干事，无需重复派单。</span>
 
                 <form th:if="${currentUser.role == 'member' and task.assigneeId == currentUser.userId and (task.taskStatus == 'in_progress' or task.taskStatus == 'revision_required')}"
                       class="inline-form"

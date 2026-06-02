@@ -18,8 +18,8 @@
     </div>
     <div class="grid grid-3">
         <section class="card">
-            <div class="metric-label">宣传需求数</div>
-            <div class="metric" th:text="${stats.requestCount}">0</div>
+            <div class="metric-label">系统任务总数</div>
+            <div class="metric" th:text="${stats.taskCount}">0</div>
         </section>
         <section class="card">
             <div class="metric-label">任务完成率</div>
@@ -32,9 +32,10 @@
     </div>
     <section class="panel" style="margin-top:16px;">
         <div class="section-heading">
-            <h2>近期任务</h2>
+            <h2>当前角色可处理任务</h2>
             <span class="muted">按当前角色展示可处理任务</span>
         </div>
+        <p class="panel-note">上方统计为系统整体数据，下方列表仅展示当前登录角色可处理的任务。</p>
         <table>
             <thead>
             <tr>

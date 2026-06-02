@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>素材归档查询 - 宣传协同平台</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: topbar}"></div>
+<main class="container">
+    <div class="page-title">
+        <div>
+            <div class="eyebrow">归档素材</div>
+            <h1>素材归档查询</h1>
+            <p>查看已确认归档的宣传成果素材。</p>
+        </div>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>活动名称</th>
+            <th>任务编号</th>
+            <th>素材类型</th>
+            <th>文件链接</th>
+            <th>归档时间</th>
+            <th>备注</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="asset : ${assets}">
+            <td th:text="${asset.activityName}">活动</td>
+            <td th:text="${asset.taskId}">1</td>
+            <td th:text="${asset.assetType}">素材类型</td>
+            <td>
+                <a class="button"
+                   th:if="${@attachment.available(asset.fileUrl)}"
+                   th:href="${asset.fileUrl}"
+                   th:target="${@attachment.external(asset.fileUrl) ? '_blank' : '_self'}"
+                   th:text="${@attachment.external(asset.fileUrl) ? '打开外部链接' : '下载附件'}">打开外部链接</a>
+                <span th:if="${@attachment.hasValue(asset.fileUrl) and !@attachment.available(asset.fileUrl)}" class="badge status-warning">
+                    <span th:text="${@attachment.display(asset.fileUrl)}">文件未上传</span>
+                </span>
+                <span class="muted" th:if="${asset.fileUrl == null or asset.fileUrl.isBlank()}">无</span>
+            </td>
+            <td th:text="${#temporals.format(asset.archivedAt, 'yyyy-MM-dd HH:mm')}">归档时间</td>
+            <td th:text="${asset.description ?: '无'}">备注</td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(assets)}">
+            <td colspan="6" class="muted">暂无归档素材</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
